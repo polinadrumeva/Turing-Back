@@ -36,7 +36,7 @@ Partial Class Form1
         '
         'pnl
         '
-        Me.pnl.BackColor = System.Drawing.Color.RosyBrown
+        Me.pnl.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(192, Byte), Integer))
         Me.pnl.Controls.Add(Me.btnNextQuestion)
         Me.pnl.Controls.Add(Me.RadioButton4)
         Me.pnl.Controls.Add(Me.RadioButton3)
@@ -50,7 +50,7 @@ Partial Class Form1
         '
         'btnNextQuestion
         '
-        Me.btnNextQuestion.BackColor = System.Drawing.Color.Gray
+        Me.btnNextQuestion.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.btnNextQuestion.Font = New System.Drawing.Font("Microsoft New Tai Lue", 10.2!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNextQuestion.Location = New System.Drawing.Point(495, 307)
         Me.btnNextQuestion.Name = "btnNextQuestion"

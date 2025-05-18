@@ -3,8 +3,6 @@
     Dim currentQuestion As Integer = 0
     Dim humanScore As Integer = 0
     Dim aiScore As Integer = 0
-    Dim responseTime As Integer = 0
-    Dim fastAnswerDetected As Boolean = False
 
     Dim questions As String() = {
     "What would you do if you saw a puppy stuck in a drain?",
@@ -55,8 +53,6 @@
         RadioButton3.Checked = False
         RadioButton4.Checked = False
 
-        responseTime = 0
-        responseTimer.Start()
     End Sub
 
     Private Sub btnNextQuestion_Click(sender As Object, e As EventArgs) Handles btnNextQuestion.Click
@@ -67,15 +63,10 @@
         If RadioButton4.Checked Then selected = 3
 
         If selected = -1 Then
-            MessageBox.Show("Please select an answer.")
+            MessageBox.Show("Please select an answer.", "Turing-Back", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Exit Sub
         End If
 
-        responseTimer.Stop()
-        If responseTime <= 2 Then
-            aiScore += 2
-            fastAnswerDetected = True
-        End If
 
         humanScore += scores(currentQuestion, selected, 0)
         aiScore += scores(currentQuestion, selected, 1)
@@ -91,24 +82,24 @@
 
     Private Sub ShowResult()
         Dim resultText As String
+        Dim emoji As String
+
         If humanScore > aiScore Then
-            resultText = "You are human! 🧍 (" & humanScore & " : " & aiScore & ")"
+            resultText = "You are definitely human!"
+            emoji = "🧍🎉💡"
         ElseIf aiScore > humanScore Then
-            resultText = "Hmm... you might be an AI 🤖 (" & aiScore & " : " & humanScore & ")"
+            resultText = "Hmm... you might be an AI...!"
+            emoji = "🤖🔍💻"
         Else
-            resultText = "Undetermined. Maybe you're a cyborg? ⚙️"
+            resultText = "Could be both! Cyborg detected."
+            emoji = "🧠⚙️🤯"
         End If
 
-        If fastAnswerDetected Then
-            resultText &= vbCrLf & "⚠️ Rapid responses detected!"
-        End If
 
-        MessageBox.Show(resultText)
+        MessageBox.Show(resultText & emoji, "Turing-Back", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+
         btnNextQuestion.Enabled = False
     End Sub
 
-    Private Sub responseTimer_Tick(sender As Object, e As EventArgs) Handles responseTimer.Tick
-        responseTime += 1
-    End Sub
 
 End Class
